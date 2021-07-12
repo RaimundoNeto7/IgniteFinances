@@ -1,8 +1,9 @@
 import Modal from 'react-modal'
-import { Container, TransactionTypeContainer } from './styles'
+import { Container, TransactionTypeContainer, TransactionTypeButton } from './styles'
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
+import { useState } from 'react'
 
 Modal.setAppElement("#root")
 
@@ -12,6 +13,8 @@ interface TransactionModalProps {
 }
 
 export function TransactionModal({ isOpen, onRequestClose }: TransactionModalProps) {
+    const [transactionType, setTransactionType] = useState("deposit")
+
     return (
         <Modal
             isOpen={isOpen}
@@ -33,15 +36,15 @@ export function TransactionModal({ isOpen, onRequestClose }: TransactionModalPro
                 <input type="number" placeholder="Valor"/>
 
                 <TransactionTypeContainer>
-                    <button type="button">
+                    <TransactionTypeButton type="button" onClick={() => { setTransactionType("deposit") }} isActive={transactionType === "deposit"} activeColor="#b6ffe4">
                         <img src={incomeImg} alt="Entrada"/>
                         <span>Entrada</span>
-                    </button>
+                    </TransactionTypeButton>
 
-                    <button type="button">
+                    <TransactionTypeButton type="button" onClick={() => { setTransactionType("withdraw") }} isActive={transactionType === "withdraw"} activeColor="#ffbcc7">
                         <img src={outcomeImg} alt="Saída"/>
                         <span>Saída</span>
-                    </button>
+                    </TransactionTypeButton>
                 </TransactionTypeContainer>
 
                 <input placeholder="Categoria"/>

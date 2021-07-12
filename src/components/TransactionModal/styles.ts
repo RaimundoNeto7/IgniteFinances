@@ -55,25 +55,29 @@ export const TransactionTypeContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
+`
 
-    button {
-        height: 4rem;
-        border: 1px solid #d7d7d7;
-        border-radius: 0.25rem;
+interface TransactionTypeButtonProps {
+    isActive: boolean;
+    activeColor: string;
+}
 
-        background: transparent;
+export const TransactionTypeButton = styled.button<TransactionTypeButtonProps>`
+    height: 4rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.25rem;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    background: ${(props) => props.isActive ? props.activeColor : 'transparent'};
 
-        transition: border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        &:hover {
-            border-color: #aaa;
-        }
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #aaa;
     }
-
     img {
         height: 20px;
         width: 20px;
