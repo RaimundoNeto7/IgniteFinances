@@ -5,21 +5,28 @@ import { App } from './App';
 
 createServer({
   models: {
-    transactions: Model
+    transaction: Model
   },
+
+  seeds(server) {
+    server.db.loadData({
+      transactions: [
+        {
+          id: 1,
+          title: "teste 1",
+          transactionType: "deposit",
+          amount: 100,
+          category: "dev",
+          createdAt: new Date(),
+        }
+      ]
+    })
+  },
+
   routes(){
     this.namespace = "api";
     this.get('/transactions', () => {
-      return [
-        {
-          id: 1,
-          title: "Transaction 1",
-          amount: 400,
-          type: "deposit",
-          category: "food",
-          createdAt: new Date()
-        }
-      ]
+      return this.schema.all("transaction")
     })
 
     this.post("/transactions", (schema, request) => {
